@@ -1,0 +1,29 @@
+PRAJWAL MHASKE
+Java Full Stack Developer
+
+Phone: 9699880215
+Email: prajwalmhaske4438@gmail.com
+LinkedIn: https://www.linkedin.com/in/prajwalmhaske2003
+
+Summary:
+Java Full Stack Developer with 2+ years of experience in building scalable web applications using Java, Spring Boot, and React.
+
+Skills:
+- Frontend: HTML, CSS, JavaScript, React.js
+- Backend: Java, Spring Boot, Spring MVC, REST API
+- Database: MySQL, JDBC
+- Tools: Git & GitHub, Figma
+
+Experience:
+Java Full Stack Developer (2+ Years)
+- Developed REST APIs, frontend UI using React, and backend services using Spring Boot.
+- Handled database integration and optimized application performance.
+
+Education:
+BBA in Computer Applications, Pune University
+
+Projects:
+- E-commerce Web App
+- Admin Panel System
+- Payment API Integration
+- CRUD Application
