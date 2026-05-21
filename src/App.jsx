@@ -1,14 +1,14 @@
 import { useMemo, useState } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
+import workerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
+import 'react-pdf/dist/Page/TextLayer.css'
+import 'react-pdf/dist/Page/AnnotationLayer.css'
 import './App.css'
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).toString()
+pdfjs.GlobalWorkerOptions.workerSrc = workerSrc
 
 function App() {
-  const resumePath = '/Prajwal_Mhaske_FullStack_Resume.pdf'
+  const resumePath = `${import.meta.env.BASE_URL}Prajwal_Mhaske_FullStack_Resume.pdf`
   const linkedinUrl = 'https://www.linkedin.com/in/prajwalmhaske2003'
   const githubUrl = 'https://github.com/'
   const prefersDark = useMemo(
@@ -19,7 +19,7 @@ function App() {
     [],
   )
   const [isDark, setIsDark] = useState(prefersDark)
-  const [pdfReady, setPdfReady] = useState(true)
+  const [pdfError, setPdfError] = useState(null)
 
   const openResume = async () => {
     window.open(resumePath, '_blank', 'noopener,noreferrer')
@@ -169,17 +169,23 @@ function App() {
             If preview is blank, place your PDF at
             `public/Prajwal_Mhaske_FullStack_Resume.pdf`.
           </p>
-          {pdfReady ? (
+          {pdfError ? (
+            <p className="resume-error">
+              Could not load resume preview.{' '}
+              <a href={resumePath} target="_blank" rel="noreferrer">
+                Open PDF
+              </a>{' '}
+              or add `Prajwal_Mhaske_FullStack_Resume.pdf` in the `public` folder.
+            </p>
+          ) : (
             <div className="resume-viewer">
-              <Document file={resumePath} onLoadError={() => setPdfReady(false)}>
+              <Document
+                file={resumePath}
+                onLoadError={(error) => setPdfError(error?.message ?? 'Failed to load PDF')}
+              >
                 <Page pageNumber={1} width={720} renderTextLayer={false} />
               </Document>
             </div>
-          ) : (
-            <p className="resume-error">
-              Resume PDF not found. Add
-              `Prajwal_Mhaske_FullStack_Resume.pdf` in the `public` folder.
-            </p>
           )}
         </section>
 
